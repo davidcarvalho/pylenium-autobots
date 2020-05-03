@@ -2,8 +2,13 @@ from selenium.webdriver.common.keys import Keys
 
 
 def test_challenge5(py, copart):
-    py.get('#input-search').type('PORSCHE', Keys.ENTER)
+    py.get('#input-search').type('PORSCHE')
+    py.get('[ng-click="search()"]').click()
+    py.get('#serverSideDataTable_processing'). \
+        should().have_attr('style', 'display: block;').should().have_attr('style', 'display: none;')
     py.get('select[name="serverSideDataTable_length"]').select('100')
+    py.get('#serverSideDataTable_processing'). \
+        should().have_attr('style', 'display: block;').should().have_attr('style', 'display: none;')
     dict_count = {}
     for model in py.find('tbody span[data-uname="lotsearchLotmodel"]'):
         if model.text not in dict_count:
@@ -16,8 +21,13 @@ def test_challenge5(py, copart):
 
 
 def test_challenge5_2(py, copart):
-    py.get('#input-search').type('PORSCHE', Keys.ENTER)
+    py.get('#input-search').type('PORSCHE')
+    py.get('[ng-click="search()"]').click()
+    py.get('#serverSideDataTable_processing'). \
+        should().have_attr('style', 'display: block;').should().have_attr('style', 'display: none;')
     py.get('select[name="serverSideDataTable_length"]').select('100')
+    py.get('#serverSideDataTable_processing'). \
+        should().have_attr('style', 'display: block;').should().have_attr('style', 'display: none;')
     dict_count = {}
     # damages
     for damage in py.find('tbody span[data-uname="lotsearchLotdamagedescription"]'):

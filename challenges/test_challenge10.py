@@ -18,7 +18,6 @@ def get_test_data():
 
 @pytest.mark.parametrize('make,model,year', get_test_data())
 def test_challenge10(make, model, year):
-    get_url = 'https://www.copart.com/public/lotSearchResultsPage'
     post_url = "https://www.copart.com/public/lots/search"
 
     headers = {
