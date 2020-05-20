@@ -2,11 +2,16 @@ import requests
 import json
 
 
-def test_challenge9():
+def test_challenge9(py):
     url = "https://www.copart.com/public/lots/search"
 
+    py.visit(url)
+    cookies = ''
+    for cookie in py.get_cookies():
+        cookies += cookie["name"] + '=' + cookie["value"] + ';'
+    py.quit()
     headers = {
-        'Cookie': 'visid_incap_242093=T6T1qhpIQXaFutz76m9ro9NFq14AAAAAQUIPAAAAAAARPIQkb6ro0/jgjw/zaWoT; g2usersessionid=6e26e86c9d293415fecd71ce3d64f555; G2JSESSIONID=5CF12588837413444F3F821F7EDAA79F-n1; incap_ses_1221_242093=AJZEO3JqL0D7zMfxjt3xEEKXrF4AAAAAgHcviJsteEK2bBiK79J1rA=='
+        'Cookie': cookies
     }
     # cars_i_like = ['toyota corolla', 'toyota elantra', 'toyota acura', 'dodge charger', 'PORSCHE PANAMERA',
     #                'PORSCHE CAYENNE', 'HONDA PRIUS', 'HONDA ACCORD', 'Nissan maxima', 'nissan rogue']

@@ -6,7 +6,7 @@ import pytest
 
 def get_test_data():
     test_data = []
-    with open('../data/tc10_test_data.csv') as csvfile:
+    with open('C:/Users/David.Carvalho/Desktop/dev/python-autobots/data/tc10_test_data.csv') as csvfile:
         read_csv = csv.reader(csvfile)
         print(type(read_csv))
         # skip header
@@ -17,14 +17,15 @@ def get_test_data():
 
 
 @pytest.mark.parametrize('make,model,year', get_test_data())
-def test_challenge10(make, model, year):
+def test_challenge10(py, make, model, year):
     post_url = "https://www.copart.com/public/lots/search"
-
+    py.visit(post_url)
+    cookies = ''
+    for cookie in py.get_cookies():
+        cookies += cookie["name"] + '=' + cookie["value"] + ';'
+    py.quit()
     headers = {
-        'Cookie': 'G2JSESSIONID=75739723A012C1AFDB92961C94276997-n2;'
-                  'visid_incap_242093=fO1CeoSIRBuo5II0F7ssrmG/rV4AAAAAQUIPAAAAAADAp/JqZFnKI2NY1chEmisI;'
-                  'incap_ses_1221_242093=TnEaI06LEX5KWB/yjt3xEEndrV4AAAAA0QNYsE8WWBLjUKI/fpEEAg==;'
-                  'g2usersessionid=e969aeb8b3517b2967639ea6c5ab1a58'
+        'Cookie': cookies
     }
 
     payload = {'query': f'{make} {model} {year}'}
